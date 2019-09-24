@@ -39,8 +39,11 @@ steps:
 images:
 - gcr.io/$PROJECT_ID/${_CLOUD_RUN_SERVICE}
 
+options:
+    substitution_option: 'ALLOW_LOOSE'
+
 substitutions:
-    _APP_DEBUG: true
+    _APP_DEBUG: 'true'
     _APP_ENV: local
     _APP_KEY: ''
     _APP_NAME: ''
