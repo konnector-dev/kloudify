@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/posts/{post}', function ($post) {
+    $posts = [
+        'one' => 'First',
+        'two' => 'Second'
+    ];
+    return view('post', [
+        'post' => $posts[$post]
+    ]);
+ });
