@@ -52,4 +52,46 @@ class InfoController extends Controller
         }
         return $_logins;
     }
+
+    public function post(Request $request)
+    {
+        $body = file_get_contents('php://input');
+        $form = $request->all();
+        $collexn = 'core';
+        if (isset($form['type']) && strlen(trim($form['type']))) {
+            $collexn = preg_replace('/[^a-zA-Z]+/', '', $form['type']);
+        }
+        unset($form['type']);
+        $post_data = [
+            'id' => (int) date('YzHisu'),
+            'body' => json_encode($body),
+            'form' => json_encode($form),
+            'ip_address' => @$_SERVER['REMOTE_ADDR'],
+            'datetime' => date('F d, Y H:i:s'),
+            'timezone' => date('F d, Y H:i:s') . ' - ' . date('e'),
+        ];
+        $konnection = $this->_konnectFirestoreClient->collection("$collexn")->document($post_data['id']);
+        $konnection->set($post_data);
+        unset($post_data['ip_address'], $post_data['id']);
+        return [
+            'collekshn' => $collexn,
+            'data' => $post_data
+        ];
+    }
+
+    public function get(Request $request)
+    {
+        $form = $request->all();
+        $collexn = 'core';
+        if (isset($form['type']) && strlen(trim($form['type']))) {
+            $collexn = preg_replace('/[^a-zA-Z]+/', '', $form['type']);
+        }
+        $konnection = $this->_konnectFirestoreClient->collection($collexn);
+        $docs = $konnection->orderBy('id', 'desc')->limit(20)->documents();
+        $_logins = [];
+        foreach ($docs as $doc) {
+            $_logins[] = $doc->data();
+        }
+        return $_logins;
+    }
 }

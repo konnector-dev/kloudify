@@ -28,3 +28,6 @@ Route::get('/posts/{post}', function ($post) {
 Route::get('/i', 'InfoController@i');
 Route::get('/fs', 'InfoController@fs');
 Route::get('/fr', 'InfoController@fr');
+
+Route::post('/post', 'InfoController@post');
+Route::get('/get', 'InfoController@get');
