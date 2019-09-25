@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        GOOGLE_CLOUD_PROJECT: ${PROJECT_ID}
     image: jdecode/php7.3-apache-pg-grpc:0.5
     ports:
       - 80:80
