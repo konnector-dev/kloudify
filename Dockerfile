@@ -19,6 +19,7 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 # https://hub.docker.com/_/php#configuration
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
+COPY . /var/www/html/
 RUN composer install -n --prefer-dist
 
 #RUN chmod -R 0777 storage bootstrap
