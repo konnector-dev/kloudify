@@ -4,7 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: jdecode/php7.3-apache-pg-grpc:0.5
+    image: kloudify:0.2
     ports:
-      - 80:80
-      
+      - 8080:80
+    volumes:
+      - .:/var/www/html

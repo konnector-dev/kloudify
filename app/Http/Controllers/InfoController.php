@@ -29,7 +29,7 @@ class InfoController extends Controller
     {
         $data_count = rand(10, 20);
         for ($i = 1; $i <= $data_count; $i++) {
-            $konnection = $this->_konnectFirestoreClient->collection('user_logins')->document(sha1(rand() . time()));
+            $konnection = $this->_konnectFirestoreClient->collection('qaings')->document(sha1(rand() . time()));
             $konnection->set([
                 'user_id' => date('YzHisu'),
                 'ip_address' => @$_SERVER['REMOTE_ADDR'],
@@ -42,7 +42,7 @@ class InfoController extends Controller
 
     public function fr()
     {
-        $konnection = $this->_konnectFirestoreClient->collection('user_logins');
+        $konnection = $this->_konnectFirestoreClient->collection('qaings');
         $docs = $konnection->orderBy('added', 'desc')->limit(10)->documents();
         $_logins = [];
         foreach ($docs as $doc) {

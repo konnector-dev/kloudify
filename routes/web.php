@@ -23,4 +23,8 @@ Route::get('/posts/{post}', function ($post) {
     return view('post', [
         'post' => $posts[$post]
     ]);
- });
+});
+
+Route::get('/i', 'InfoController@i');
+Route::get('/fs', 'InfoController@fs');
+Route::get('/fr', 'InfoController@fr');

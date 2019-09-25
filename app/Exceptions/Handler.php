@@ -36,7 +36,7 @@ class Handler extends ExceptionHandler
     {
         parent::report($exception);
         if ($this->shouldReport($exception)) {
-            (new \Absszero\ErrorReporting)->report($exception);
+            //(new \Absszero\ErrorReporting)->report($exception);
         }
     }
 
