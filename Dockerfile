@@ -1,9 +1,6 @@
 
 FROM jdecode/php7.3-apache-pg-grpc:0.5
 
-# Copy local code to the container image.
-COPY . /var/www/html/
-
 # Use the PORT environment variable in Apache configuration files.
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
@@ -28,3 +25,11 @@ RUN composer install -n --prefer-dist
 RUN chown -R www-data:www-data storage bootstrap
 
 #RUN php artisan migrate
+
+#Stackdriver monitoring agent
+RUN curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh
+RUN bash install-monitoring-agent.sh
+
+#Stackdriver logging agent
+RUN curl -sSO https://dl.google.com/cloudagents/install-logging-agent.sh
+RUN bash install-logging-agent.sh
