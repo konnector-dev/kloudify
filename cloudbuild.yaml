@@ -1,7 +1,22 @@
 steps:
   # build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/${_CLOUD_RUN_SERVICE}', '.']
+  args: [
+    'build', 
+    '-t', 
+    'gcr.io/$PROJECT_ID/${_CLOUD_RUN_SERVICE}', 
+    '.',
+    '--build-arg',
+    'APP_DEBUG=${_APP_DEBUG},
+    APP_KEY=${_APP_KEY},
+    APP_NAME=${_APP_NAME},
+    APP_ENV=${_APP_ENV},
+    DB_CONNECTION=${_DB_CONNECTION},
+    DB_HOST=${_DB_HOST},
+    DB_DATABASE=${_DB_DATABASE},
+    DB_USERNAME=${_DB_USERNAME},
+    DB_PASSWORD=${_DB_PASSWORD}'
+    ]
   # push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/${_CLOUD_RUN_SERVICE}']
