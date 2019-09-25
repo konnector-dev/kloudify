@@ -15,7 +15,8 @@ steps:
     DB_HOST=${_DB_HOST},
     DB_DATABASE=${_DB_DATABASE},
     DB_USERNAME=${_DB_USERNAME},
-    DB_PASSWORD=${_DB_PASSWORD}'
+    DB_PASSWORD=${_DB_PASSWORD},
+    GOOGLE_CLOUD_PROJECT=${PROJECT_ID}'
     ]
   # push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
