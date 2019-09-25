@@ -31,7 +31,7 @@ class InfoController extends Controller
         for ($i = 1; $i <= $data_count; $i++) {
             $konnection = $this->_konnectFirestoreClient->collection('qaings')->document(sha1(rand() . time()));
             $konnection->set([
-                'user_id' => date('YzHisu'),
+                'user_id' => (int) date('YzHisu'),
                 'ip_address' => @$_SERVER['REMOTE_ADDR'],
                 'added' => date('F d, Y H:i:s'),
                 'timezone_added' => date('F d, Y H:i:s') . ' - ' . date('e'),
