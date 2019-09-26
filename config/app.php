@@ -174,6 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Jenssegers\Rollbar\RollbarServiceProvider::class,
         Absszero\ErrorReportingServiceProvider::class,
 
     ],
