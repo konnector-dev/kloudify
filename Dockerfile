@@ -27,6 +27,8 @@ ARG GOOGLE_CLOUD_PROJECT
 RUN echo " = ${GOOGLE_CLOUD_PROJECT}";
 RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
 
+RUN /newrelic.sh
+
 RUN composer install -n --prefer-dist
 
 #RUN chmod -R 0777 storage bootstrap

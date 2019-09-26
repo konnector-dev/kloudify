@@ -7,7 +7,8 @@ steps:
     'gcr.io/$PROJECT_ID/${_CLOUD_RUN_SERVICE}', 
     '.',
     '--build-arg',
-    'GOOGLE_CLOUD_PROJECT=${PROJECT_ID}'
+    'GOOGLE_CLOUD_PROJECT=${PROJECT_ID}
+    NEWRELIC_LICENSE=${_NEWRELIC_LICENSE}'
     ]
   # push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
@@ -42,7 +43,8 @@ steps:
     DB_USERNAME=${_DB_USERNAME},
     DB_PASSWORD=${_DB_PASSWORD},
     GOOGLE_CLOUD_PROJECT=${PROJECT_ID},
-    ROLLBAR_ACCESS_TOKEN=${_ROLLBAR_ACCESS_TOKEN}'
+    ROLLBAR_ACCESS_TOKEN=${_ROLLBAR_ACCESS_TOKEN}
+    NEWRELIC_LICENSE=${_NEWRELIC_LICENSE}'
     ]
 images:
 - gcr.io/$PROJECT_ID/${_CLOUD_RUN_SERVICE}
@@ -63,3 +65,4 @@ substitutions:
     _DB_PASSWORD: ''
     _CLOUD_RUN_SERVICE: 'kloud-notifier'
     _ROLLBAR_ACCESS_TOKEN: ''
+    _NEWRELIC_LICENSE: ''
