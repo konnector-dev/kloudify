@@ -23,6 +23,8 @@ RUN echo "export GOOGLE_CLOUD_PROJECT=${PROJECT_ID}" >> /etc/environment
 # https://hub.docker.com/_/php#configuration
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
+COPY .env.example .env
+
 RUN composer install -n --prefer-dist
 
 #RUN chmod -R 0777 storage bootstrap
