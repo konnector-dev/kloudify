@@ -24,7 +24,7 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY .env.example .env
 ARG GOOGLE_CLOUD_PROJECT
 
-RUN echo " = {GOOGLE_CLOUD_PROJECT}";
+RUN echo " = ${GOOGLE_CLOUD_PROJECT}";
 RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
 
 RUN composer install -n --prefer-dist
