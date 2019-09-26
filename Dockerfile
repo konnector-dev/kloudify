@@ -15,8 +15,6 @@ RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/Allo
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-RUN echo "export GOOGLE_CLOUD_PROJECT=${PROJECT_ID}" >> /etc/environment
-
 # Configure PHP for development.
 # Switch to the production php.ini for production operations.
 # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -24,10 +22,14 @@ RUN echo "export GOOGLE_CLOUD_PROJECT=${PROJECT_ID}" >> /etc/environment
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 COPY .env.example .env
+ARG GOOGLE_CLOUD_PROJECT
+
+RUN echo GOOGLE_CLOUD_PROJECT
+RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
 
 RUN composer install -n --prefer-dist
 
 #RUN chmod -R 0777 storage bootstrap
 RUN chown -R www-data:www-data storage bootstrap
 
-#RUN php artisan migrate
+RUN php artisan migrate
