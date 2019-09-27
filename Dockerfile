@@ -53,6 +53,8 @@ RUN composer install -n --prefer-dist
 #RUN chmod -R 0777 storage bootstrap
 RUN chown -R www-data:www-data storage bootstrap
 
+RUN php artisan key:generate
+
 RUN ./.deploy/commands/parallel_lint.sh
 RUN ./.deploy/commands/phpcs.sh
 RUN ./.deploy/commands/phpunit.sh
