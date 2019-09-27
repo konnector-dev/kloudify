@@ -7,8 +7,12 @@ steps:
     'gcr.io/$PROJECT_ID/${_CLOUD_RUN_SERVICE}', 
     '.',
     '--build-arg',
-    'GOOGLE_CLOUD_PROJECT=${PROJECT_ID}
-    NEWRELIC_LICENSE=${_NEWRELIC_LICENSE}'
+    'GOOGLE_CLOUD_PROJECT=${PROJECT_ID}',
+    '--build-arg',
+    'NEWRELIC_LICENSE=${_NEWRELIC_LICENSE}',
+    '--build-arg',
+    'PORT=${PORT}'
+
     ]
   # push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
