@@ -13,8 +13,23 @@ RUN echo " = ${NEWRELIC_LICENSE}";
 RUN echo " = ${GOOGLE_CLOUD_PROJECT}";
 #RUN echo " = ${PORT}";
 
+# Install New Relic daemon
+RUN apt-get update && \
+    apt-get -yq install gnupg2 && \
+    wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
+    echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
+ 
+RUN apt-get update && \
+    apt-get -yq install newrelic-php5
+ 
+# Setup environment variables for initializing New Relic
+ENV NR_INSTALL_SILENT 1
+ENV NR_INSTALL_KEY "${NEWRELIC_LICENSE}"
+ENV NR_APP_NAME "Kloudify"
+
+RUN service apache2 restart
 # Use the PORT environment variable in Apache configuration files.
-#RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
 #ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
@@ -35,21 +50,6 @@ COPY .env.example .env
 RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
 
 
-# Install New Relic daemon
-RUN apt-get update && \
-    apt-get -yq install gnupg2 && \
-    wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
-    echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
- 
-RUN apt-get update && \
-    apt-get -yq install newrelic-php5
- 
-# Setup environment variables for initializing New Relic
-ENV NR_INSTALL_SILENT 1
-ENV NR_INSTALL_KEY "${NEWRELIC_LICENSE}"
-ENV NR_APP_NAME "Kloudify"
-
-RUN service apache2 restart
 
 RUN composer install -n --prefer-dist
 
