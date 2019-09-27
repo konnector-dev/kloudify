@@ -27,11 +27,23 @@ ARG GOOGLE_CLOUD_PROJECT
 RUN echo " = ${GOOGLE_CLOUD_PROJECT}";
 RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
 
-RUN /newrelic.sh
+ARG NEWRELIC_LICENSE
+# Install New Relic daemon
+RUN apt-get update && \
+    apt-get -yq install wget && \
+    wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
+    echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
+ 
+RUN apt-get update && \
+    apt-get -yq install newrelic-php5
+ 
+# Setup environment variables for initializing New Relic
+ENV NR_INSTALL_SILENT 1
+ENV NR_INSTALL_KEY "${NEWRELIC_LICENSE}"
+ENV NR_APP_NAME "Kloudify"
 
 RUN composer install -n --prefer-dist
 
 #RUN chmod -R 0777 storage bootstrap
 RUN chown -R www-data:www-data storage bootstrap
 
-RUN php artisan migrate
