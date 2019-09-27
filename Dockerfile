@@ -4,7 +4,6 @@ FROM jdecode/php7.3-apache-pg-grpc:0.5
 # Copy local code to the container image.
 COPY . /var/www/html/
 
-ARG PORT
 ARG NEWRELIC_LICENSE
 ARG GOOGLE_CLOUD_PROJECT
 
@@ -27,17 +26,17 @@ RUN apt-get update && \
  
 #ENV NR_APP_NAME "Kloudify"
 
-#RUN service apache2 restart
+RUN service apache2 restart
 # Use the PORT environment variable in Apache configuration files.
-#RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
 #ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
 # Authorise .htaccess files
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-#RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
-#RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Configure PHP for development.
 # Switch to the production php.ini for production operations.
@@ -53,4 +52,6 @@ RUN composer install -n --prefer-dist
 
 #RUN chmod -R 0777 storage bootstrap
 RUN chown -R www-data:www-data storage bootstrap
+
+RUN ./.deploy/commands/parallel_lint.sh
 
