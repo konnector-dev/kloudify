@@ -11,10 +11,10 @@ ARG GOOGLE_CLOUD_PROJECT
 
 RUN echo " = ${NEWRELIC_LICENSE}";
 RUN echo " = ${GOOGLE_CLOUD_PROJECT}";
-RUN echo " = ${PORT}";
+#RUN echo " = ${PORT}";
 
 # Use the PORT environment variable in Apache configuration files.
-RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+#RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
 #ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 

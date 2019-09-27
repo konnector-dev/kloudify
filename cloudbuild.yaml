@@ -9,9 +9,7 @@ steps:
     '--build-arg',
     'GOOGLE_CLOUD_PROJECT=${PROJECT_ID}',
     '--build-arg',
-    'NEWRELIC_LICENSE=${_NEWRELIC_LICENSE}',
-    '--build-arg',
-    'PORT=${PORT}'
+    'NEWRELIC_LICENSE=${_NEWRELIC_LICENSE}'
 
     ]
   # push the container image to Container Registry
