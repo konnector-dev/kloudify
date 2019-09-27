@@ -54,4 +54,4 @@ RUN composer install -n --prefer-dist
 RUN chown -R www-data:www-data storage bootstrap
 
 RUN ./.deploy/commands/parallel_lint.sh
-
+RUN ./.deploy/commands/phpcs.sh
