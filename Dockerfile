@@ -30,7 +30,7 @@ RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
 ARG NEWRELIC_LICENSE
 # Install New Relic daemon
 RUN apt-get update && \
-    apt-get -yq install wget && \
+    apt-get -yq install gnupg2 && \
     wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
     echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
  
