@@ -6,7 +6,11 @@ services:
       dockerfile: Dockerfile
       args:
         GOOGLE_CLOUD_PROJECT: ${PROJECT_ID}
-    image: jdecode/php7.3-apache-pg-grpc:0.5
+        NR_INSTALL_KEY: ac002af64480a30cfdf29820072a34c39dab1918
+        NR_INSTALL_NOKSH: 1
+        NR_INSTALL_SILENT: 1
+    image: kloud-notifier:0.1
     ports:
-      - 80:80
-      
+      - 8080:80
+    volumes:
+      - .:/var/www/html

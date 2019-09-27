@@ -19,25 +19,25 @@ RUN apt-get update && \
     wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
     echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
  
+# Setup environment variables for initializing New Relic
+ENV NR_INSTALL_SILENT 1
+ENV NR_INSTALL_KEY "${NR_INSTALL_KEY}"
 RUN apt-get update && \
     apt-get -yq install newrelic-php5
  
-# Setup environment variables for initializing New Relic
-ENV NR_INSTALL_SILENT 1
-ENV NR_INSTALL_KEY "${NEWRELIC_LICENSE}"
-ENV NR_APP_NAME "Kloudify"
+#ENV NR_APP_NAME "Kloudify"
 
-RUN service apache2 restart
+#RUN service apache2 restart
 # Use the PORT environment variable in Apache configuration files.
-RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+#RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
 #ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
 # Authorise .htaccess files
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+#RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
+#RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Configure PHP for development.
 # Switch to the production php.ini for production operations.
@@ -48,8 +48,6 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY .env.example .env
 
 RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
-
-
 
 RUN composer install -n --prefer-dist
 
