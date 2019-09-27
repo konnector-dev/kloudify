@@ -28,6 +28,8 @@ RUN echo " = ${GOOGLE_CLOUD_PROJECT}";
 RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
 
 ARG NEWRELIC_LICENSE
+
+RUN echo " = ${NEWRELIC_LICENSE}";
 # Install New Relic daemon
 RUN apt-get update && \
     apt-get -yq install gnupg2 && \
@@ -41,6 +43,8 @@ RUN apt-get update && \
 ENV NR_INSTALL_SILENT 1
 ENV NR_INSTALL_KEY "${NEWRELIC_LICENSE}"
 ENV NR_APP_NAME "Kloudify"
+
+RUN service apache2 restart
 
 RUN composer install -n --prefer-dist
 
