@@ -55,6 +55,4 @@ RUN chown -R www-data:www-data storage bootstrap
 
 RUN php artisan key:generate
 
-RUN ./.deploy/commands/parallel_lint.sh
-RUN ./.deploy/commands/phpcs.sh
-RUN ./.deploy/commands/phpunit.sh
+RUN ./.deploy/validate.sh
