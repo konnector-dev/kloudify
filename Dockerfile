@@ -51,4 +51,8 @@ RUN chown -R www-data:www-data storage bootstrap
 
 RUN php artisan key:generate
 
+<<<<<<< HEAD
 RUN composer cghooks update
+=======
+RUN ./.deploy/validate.sh
+>>>>>>> bcc6f5e99ac409067f1ed4af0a74c6db4c901dbd
