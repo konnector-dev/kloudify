@@ -7,11 +7,6 @@ COPY . /var/www/html/
 ARG NEWRELIC_LICENSE
 ARG GOOGLE_CLOUD_PROJECT
 
-
-RUN echo " = ${NEWRELIC_LICENSE}";
-RUN echo " = ${GOOGLE_CLOUD_PROJECT}";
-#RUN echo " = ${PORT}";
-
 # Install New Relic daemon
 RUN apt-get update && \
     apt-get -yq install gnupg2 && \
@@ -20,7 +15,8 @@ RUN apt-get update && \
  
 # Setup environment variables for initializing New Relic
 ENV NR_INSTALL_SILENT 1
-ENV NR_INSTALL_KEY "${NR_INSTALL_KEY}"
+ENV NR_INSTALL_KEY "${NEWRELIC_LICENSE}"
+ENV NR_APP_NAME "${NR_APP_NAME}"
 RUN apt-get update && \
     apt-get -yq install newrelic-php5
  
