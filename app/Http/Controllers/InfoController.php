@@ -63,7 +63,7 @@ class InfoController extends Controller
         }
         unset($form['type']);
         $post_data = [
-            'id' => (int) date('YzHisu'),
+            'id' => date('YzHisu'),
             'body' => json_encode($body),
             'form' => json_encode($form),
             'ip_address' => @$_SERVER['REMOTE_ADDR'],

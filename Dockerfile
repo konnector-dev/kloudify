@@ -26,11 +26,12 @@ RUN composer install -n --prefer-dist
 RUN chown -R www-data:www-data storage bootstrap
 
 #RUN php artisan migrate
+#RUN apt-get update && apt-get install -y gnupg2
 
 #Stackdriver monitoring agent
-RUN curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh
-RUN bash install-monitoring-agent.sh
+#RUN curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh
+#RUN bash install-monitoring-agent.sh
 
 #Stackdriver logging agent
-RUN curl -sSO https://dl.google.com/cloudagents/install-logging-agent.sh
-RUN bash install-logging-agent.sh
+#RUN curl -sSO https://dl.google.com/cloudagents/install-logging-agent.sh
+#RUN bash install-logging-agent.sh
