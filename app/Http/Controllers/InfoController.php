@@ -59,7 +59,7 @@ class InfoController extends Controller
         $form = $request->all();
         $collexn = 'core';
         if (isset($form['type']) && strlen(trim($form['type']))) {
-            $collexn = preg_replace('/[^a-zA-Z]+/', '', $form['type']);
+            $collexn = preg_replace('/[^a-zA-Z-]+/', '', $form['type']);
         }
         unset($form['type']);
         $post_data = [
