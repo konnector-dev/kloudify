@@ -14,11 +14,17 @@ RUN apt-get update && \
     echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
  
 # Setup environment variables for initializing New Relic
+
+RUN apt-get update && \
+    apt-get -yq install newrelic-php5
+
+ARG NR_INSTALL_SILENT
+
 ENV NR_INSTALL_SILENT 1
 ENV NR_INSTALL_KEY "${NEWRELIC_LICENSE}"
 ENV NR_APP_NAME "${NR_APP_NAME}"
-RUN apt-get update && \
-    apt-get -yq install newrelic-php5
+
+RUN newrelic-install install
 
 #ENV NR_APP_NAME "Kloudify"
 
