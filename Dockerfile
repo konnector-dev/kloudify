@@ -7,17 +7,18 @@ COPY . /var/www/html/
 ARG NEWRELIC_LICENSE
 ARG GOOGLE_CLOUD_PROJECT
 
-RUN cd ~ \
-    && export NEWRELIC_VERSION="$(curl -sS https://download.newrelic.com/php_agent/release/ | sed -n 's/.*>\(.*linux-musl\).tar.gz<.*/\1/p')" \
-    && curl -sS "https://download.newrelic.com/php_agent/release/${NEWRELIC_VERSION}.tar.gz" | gzip -dc | tar xf - \
-    && cd "${NEWRELIC_VERSION}" \
-    && NR_INSTALL_SILENT=true ./newrelic-install install \
-    && cd .. \
-    && unset NEWRELIC_VERSION \
-    && sed -i \
-        -e "s/newrelic.license =.*/newrelic.license = \${NEWRELIC_LICENSE}/" \
-        -e "s/newrelic.appname =.*/newrelic.appname = \kloudify/" \
-        /usr/local/etc/php/conf.d/newrelic.ini
+# Install New Relic daemon
+RUN apt-get update && \
+    apt-get -yq install gnupg2 && \
+    wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
+    echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
+ 
+# Setup environment variables for initializing New Relic
+ENV NR_INSTALL_SILENT 1
+ENV NR_INSTALL_KEY "${NEWRELIC_LICENSE}"
+ENV NR_APP_NAME "${NR_APP_NAME}"
+RUN apt-get update && \
+    apt-get -yq install newrelic-php5
 
 #ENV NR_APP_NAME "Kloudify"
 
