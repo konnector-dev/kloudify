@@ -17,7 +17,7 @@ header('X-Accel-Buffering: no');//Nginx: unbuffered responses suitable for Comet
     $newMsgs = [
         [
             'id'      => $id,
-            'title'   => 'title' . $id,
+            'title-'   => 'title' . $id,
             'content' => 'content' . $id,
         ],
     ];//get data from database or service.
