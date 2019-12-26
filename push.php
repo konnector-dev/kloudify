@@ -11,18 +11,18 @@ use Hhxsv5\SSE\Update;
 
 //example: push messages to client
 
-
-(new SSE())->start(new Update(function () {
-    $id = mt_rand(1, 1000);
-    $newMsgs = [
-        [
-            'id'      => $id,
-            'title'   => 'title' . $id,
-            'content' => 'content' . $id,
-        ],
-    ];//get data from database or service.
-    if (!empty($newMsgs)) {
-        return json_encode(['newMsgs' => $newMsgs]);
-    }
-    return false;//return false if no new messages
-}), 'new-msgs');
+echo 'testing';
+// (new SSE())->start(new Update(function () {
+//     $id = mt_rand(1, 1000);
+//     $newMsgs = [
+//         [
+//             'id'      => $id,
+//             'title'   => 'title' . $id,
+//             'content' => 'content' . $id,
+//         ],
+//     ];//get data from database or service.
+//     if (!empty($newMsgs)) {
+//         return json_encode(['newMsgs' => $newMsgs]);
+//     }
+//     return false;//return false if no new messages
+// }), 'new-msgs');
