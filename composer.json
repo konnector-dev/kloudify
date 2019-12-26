@@ -1,5 +1,6 @@
 {
     "require": {
-        "hhxsv5/php-sse": "~1.0"
+        "hhxsv5/php-sse": "~1.0",
+        "tonyhhyip/sse": "^2.1"
     }
 }
