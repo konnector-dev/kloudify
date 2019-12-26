@@ -14,16 +14,17 @@ use Hhxsv5\SSE\Update;
 
 (new SSE())->start(new Update(function () {
     $id = mt_rand(1, 1000);
-    return '123';
-    // $newMsgs = [
-    //     [
-    //         'id'      => $id,
-    //         'title'   => 'title' . $id,
-    //         'content' => 'content' . $id,
-    //     ],
-    // ];//get data from database or service.
-    // if (!empty($newMsgs)) {
-    //     return json_encode(['newMsgs' => $newMsgs]);
-    // }
-    // return false;//return false if no new messages
+    $newMsgs = [
+        [
+            'id'      => $id,
+            'title'   => 'title' . $id,
+            'content' => 'content' . $id,
+        ],
+    ];//get data from database or service.
+    if (!empty($newMsgs)) {
+        return json_encode(['newMsgs' => $newMsgs]);
+    }
+    return false;//return false if no new messages
+    flush();
 }), 'new-msgs');
+
