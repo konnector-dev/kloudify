@@ -57,7 +57,15 @@ class SSE
 {
     public function start(Update $update, $eventType = null, $milliRetry = 2000)
     {
+        $interval=10; //minutes
+        set_time_limit( 0 );
+        $sleep = $interval*60-(time());
         while (true) {
+            if(time() != $sleep) {
+                // the looping will pause on the specific time it was set to sleep
+                // it will loop again once it finish sleeping.
+                time_sleep_until($sleep); 
+              }
             $changedData = $update->getUpdatedData();
             if ($changedData !== false) {
                 $event = [
@@ -73,14 +81,13 @@ class SSE
             }
             $f = new Event($event);
             echo $f->tring();
-           
+            ob_flush();
+            flush();
             // if the connection has been closed by the client we better exit the loop
             if (connection_aborted()) {
                 return;
             }
             sleep($update->getCheckInterval());
-            ob_flush();
-            flush();
         }
     }
 
@@ -99,7 +106,7 @@ class Update
      */
     protected $checkInterval;
 
-    public function __construct(callable $updateCallback, $checkInterval = 8)
+    public function __construct(callable $updateCallback, $checkInterval = 5)
     {
         $this->updateCallback = $updateCallback;
         $this->checkInterval = $checkInterval;
