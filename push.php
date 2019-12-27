@@ -71,11 +71,11 @@ class SSE
                     'comment' => 'no update',
                 ];
             }
-            ob_implicit_flush(true);
-ob_end_flush();
+            
             $f = new Event($event);
             echo $f->tring();
-            
+            ob_implicit_flush(true);
+            ob_end_flush();
             // if the connection has been closed by the client we better exit the loop
             if (connection_aborted()) {
                 return;
