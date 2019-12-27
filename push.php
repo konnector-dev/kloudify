@@ -73,13 +73,14 @@ class SSE
             }
             $f = new Event($event);
             echo $f->tring();
-            ob_flush();
-            flush();
+           
             // if the connection has been closed by the client we better exit the loop
             if (connection_aborted()) {
                 return;
             }
             sleep($update->getCheckInterval());
+            ob_flush();
+            flush();
         }
     }
 
