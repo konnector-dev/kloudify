@@ -56,8 +56,9 @@ class Event
 class SSE
 {
     public function start(Update $update, $eventType = null, $milliRetry = 2000)
-    {        
+    {         ob_start();
         while (true) {
+           
             $changedData = $update->getUpdatedData();
             if ($changedData !== false) {
                 $event = [
@@ -80,7 +81,9 @@ class SSE
                 return;
             }
             sleep($update->getCheckInterval());
+            ob_end_flush();
         }
+        ob_end_flush();
     }
 
 }
