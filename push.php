@@ -1,5 +1,5 @@
 <?php
-echo phpinfo();die;
+// echo phpinfo();die;
 include './vendor/autoload.php';
 
 // use Hhxsv5\SSE\SSE;
