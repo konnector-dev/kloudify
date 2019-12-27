@@ -10,7 +10,6 @@ include './vendor/autoload.php';
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 header('Connection: keep-alive');
-header('Content-Encoding: none');
 header('X-Accel-Buffering: no');//Nginx: unbuffered responses suitable for Comet and HTTP streaming applications
 class Event
 {
@@ -58,6 +57,7 @@ class SSE
 {
     public function start(Update $update, $eventType = null, $milliRetry = 2000)
     {        
+        if (ob_get_level() == 0) ob_start();
         while (true) {
             $changedData = $update->getUpdatedData();
             if ($changedData !== false) {
@@ -82,7 +82,7 @@ class SSE
             }
             sleep($update->getCheckInterval());
         }
-        ob_end_clean();
+        ob_end_flush();
     }
 
 }
