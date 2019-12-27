@@ -57,8 +57,10 @@ class SSE
 {
     public function start(Update $update, $eventType = null, $milliRetry = 2000)
     {        
-        if (ob_get_level() == 0) ob_start();
-        while (true) {
+        // while (true) {
+        $multiplier = 1;
+		$size = 1024 * $multiplier;
+		for($i = 1; $i <= $size; $i++) {
             $changedData = $update->getUpdatedData();
             if ($changedData !== false) {
                 $event = [
@@ -82,7 +84,6 @@ class SSE
             }
             sleep($update->getCheckInterval());
         }
-        ob_end_flush();
     }
 
 }
