@@ -57,7 +57,7 @@ class SSE
 {
     public function start(Update $update, $eventType = null, $milliRetry = 2000)
     {
-        while (true) {
+        // while (true) {
             $changedData = $update->getUpdatedData();
             if ($changedData !== false) {
                 $event = [
@@ -80,7 +80,7 @@ class SSE
                 return;
             }
             sleep($update->getCheckInterval());
-        }
+        // }
     }
 
 }
