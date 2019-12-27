@@ -1,5 +1,5 @@
 <?php
-
+echo phpinfo();die;
 include './vendor/autoload.php';
 
 // use Hhxsv5\SSE\SSE;
@@ -57,10 +57,7 @@ class SSE
 {
     public function start(Update $update, $eventType = null, $milliRetry = 2000)
     {        
-        // while (true) {
-        $multiplier = 1;
-		$size = 1024 * $multiplier;
-		for($i = 1; $i <= $size; $i++) {
+        while (true) {
             $changedData = $update->getUpdatedData();
             if ($changedData !== false) {
                 $event = [
