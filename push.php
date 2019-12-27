@@ -57,15 +57,9 @@ class SSE
 {
     public function start(Update $update, $eventType = null, $milliRetry = 2000)
     {
-        $interval=10; //minutes
-        set_time_limit( 0 );
-        $sleep = $interval*60-(time());
         while (true) {
-            if(time() != $sleep) {
-                // the looping will pause on the specific time it was set to sleep
-                // it will loop again once it finish sleeping.
-                time_sleep_until($sleep); 
-              }
+            ob_flush();
+            flush();
             $changedData = $update->getUpdatedData();
             if ($changedData !== false) {
                 $event = [
@@ -80,7 +74,11 @@ class SSE
                 ];
             }
             $f = new Event($event);
-            echo $f->tring();
+            $d =  $f->tring();
+            if ($d == '') {
+                break;
+            }
+            echo $d;
             ob_flush();
             flush();
             // if the connection has been closed by the client we better exit the loop
