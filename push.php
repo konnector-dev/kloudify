@@ -71,8 +71,8 @@ class SSE
                     'comment' => 'no update',
                 ];
             }
-            ob_flush();
-            flush();
+            ob_implicit_flush(true);
+ob_end_flush();
             $f = new Event($event);
             echo $f->tring();
             
