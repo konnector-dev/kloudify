@@ -56,10 +56,8 @@ class Event
 class SSE
 {
     public function start(Update $update, $eventType = null, $milliRetry = 2000)
-    {
+    {        
         while (true) {
-            ob_flush();
-            flush();
             $changedData = $update->getUpdatedData();
             if ($changedData !== false) {
                 $event = [
@@ -73,14 +71,11 @@ class SSE
                     'comment' => 'no update',
                 ];
             }
-            $f = new Event($event);
-            $d =  $f->tring();
-            if ($d == '') {
-                break;
-            }
-            echo $d;
             ob_flush();
             flush();
+            $f = new Event($event);
+            echo $f->tring();
+            
             // if the connection has been closed by the client we better exit the loop
             if (connection_aborted()) {
                 return;
@@ -104,7 +99,7 @@ class Update
      */
     protected $checkInterval;
 
-    public function __construct(callable $updateCallback, $checkInterval = 5)
+    public function __construct(callable $updateCallback, $checkInterval = 3)
     {
         $this->updateCallback = $updateCallback;
         $this->checkInterval = $checkInterval;
