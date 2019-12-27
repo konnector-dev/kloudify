@@ -10,7 +10,6 @@ include './vendor/autoload.php';
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 header('Connection: keep-alive');
-header('Content-Encoding: none');
 header('X-Accel-Buffering: no');//Nginx: unbuffered responses suitable for Comet and HTTP streaming applications
 class Event
 {
@@ -72,17 +71,17 @@ class SSE
                     'comment' => 'no update',
                 ];
             }
-            
             $f = new Event($event);
             echo $f->tring();
-            ob_implicit_flush(true);
-            ob_end_flush();
+            ob_flush();
+            flush();
             // if the connection has been closed by the client we better exit the loop
             if (connection_aborted()) {
                 return;
             }
             sleep($update->getCheckInterval());
         }
+        ob_end_clean();
     }
 
 }
