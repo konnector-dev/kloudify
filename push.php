@@ -13,18 +13,7 @@ header('Connection: keep-alive');
 header('X-Accel-Buffering: no');//Nginx: unbuffered responses suitable for Comet and HTTP streaming applications
 
 $data = (new SSE())->start(new Update(function () {
-    $id = mt_rand(1, 1000);
-    $newMsgs = [
-        [
-            'id'      => $id,
-            'title'   => 'title' . $id,
-            'content' => 'content' . $id,
-        ],
-    ];//get data from database or service.
-    if (!empty($newMsgs)) {
-        return json_encode(['newMsgs' => $newMsgs]);
-    }
-    return false;//return false if no new messages
+    return '--------'. mt_rand(1, 1000). "\n\n";
 }));
 // echo 'data: '. '--------'. mt_rand(1, 1000). "\n\n";
 flush();
