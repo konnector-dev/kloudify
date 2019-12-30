@@ -1,4 +1,10 @@
 <?php
+if (function_exists('apache_setenv')) {
+    @apache_setenv('no-gzip', 1);
+}
+@ini_set('zlib.output_compression', 0);
+@ini_set('implicit_flush', 5);
+
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 $i = 1;
