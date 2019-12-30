@@ -21,7 +21,7 @@ header('Connection: keep-alive');
 
 $counter = 1;
 
-while (1) {
+while ($counter <= 10) {
     // Every second, send a "ping" event.
 
     $curDate = date('r');
@@ -36,6 +36,6 @@ while (1) {
 
     ob_flush();
     flush();
-    usleep(2000000);
+    usleep(2000000 - 10000);
     $counter++;
 }
