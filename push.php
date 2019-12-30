@@ -7,6 +7,12 @@ use Hhxsv5\SSE\Update;
 
 //example: push messages to client
 
+if (function_exists('apache_setenv')) {
+    @apache_setenv('no-gzip', 1);
+}
+@ini_set('zlib.output_compression', 0);
+@ini_set('implicit_flush', 5);
+
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 header('Connection: keep-alive');
@@ -16,8 +22,8 @@ header('X-Accel-Buffering: no');//Nginx: unbuffered responses suitable for Comet
     $id = mt_rand(1, 1000);
     $newMsgs = [
         [
-            'id'      => $id,
-            'title-'   => 'title' . $id,
+            'id' => $id,
+            'title-' => 'title' . $id,
             'content' => 'content' . $id,
         ],
     ];//get data from database or service.
