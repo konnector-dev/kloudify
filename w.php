@@ -36,6 +36,6 @@ while ($counter <= 10) {
 
     ob_flush();
     flush();
-    usleep(2000000 - 10000);
+    usleep(1000000 - 10000);
     $counter++;
 }
