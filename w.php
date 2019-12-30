@@ -7,6 +7,8 @@ if (function_exists('apache_setenv')) {
 
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
+//header('Transfer-encoding: chunked');
+header('X-Accel-Buffering: no');
 header('Connection: keep-alive');
 
 $i = 1;
