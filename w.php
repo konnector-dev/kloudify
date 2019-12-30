@@ -11,11 +11,13 @@ header('Connection: keep-alive');
 
 $i = 1;
 while ($i <= 10) {
-    print "id: $id\n";
+    print "id: $i\n";
     $time = date('r');
-    echo "data: The server time is: {$time}\n";
-    ob_flush();
+    print "data: The server time is: {$time}\n\n";
     flush();
+    if (ob_get_level()) {
+        ob_flush();
+    }
     usleep(2000000);
     $i++;
 }
