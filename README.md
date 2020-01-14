@@ -1,2 +1,0 @@
-# kloudify
-Kloud Notifier
