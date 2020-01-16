@@ -1,3 +1,6 @@
- const shell = require('shelljs')
+const shell = require('shelljs')
+function performance() {
+    
+    shell.exec('./performance-testing.sh')
 
- shell.exec('./performance-testing.sh')
+}
