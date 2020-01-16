@@ -1,4 +1,4 @@
 const shell = require('shelljs')
-exports.performance = () => {
+exports.performance = (context) => {
     shell.exec('./performance-testing.sh')
 };

@@ -1,6 +1,6 @@
 {
   "dependencies": {
     "newman": "4.5.7",
-    "shelljs": "0.8.3"
+    "shelljs": "^0.8.3"
   }
 }
