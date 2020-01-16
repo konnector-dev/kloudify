@@ -1,6 +1,4 @@
 const shell = require('shelljs')
-function performance() {
-    
+exports.performance = () => {
     shell.exec('./performance-testing.sh')
-
-}
+};
