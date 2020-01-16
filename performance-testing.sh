@@ -10,8 +10,8 @@ echo 'Performance testing...'
 
 LOADTEST='newman run ./API-v1-qa.postman_collection.json -e ./UAT.postman_environment.json'
 
-for i in {1..100}
+for i in {1..2}
 do
-  LOADTEST="${LOADTEST} & newman run ./API-v1-qa.postman_collection.json -e ./UAT.postman_environment.json"
+ LOADTEST="${LOADTEST} & newman run ./API-v1-qa.postman_collection.json -e ./UAT.postman_environment.json"
 done
 eval $LOADTEST
