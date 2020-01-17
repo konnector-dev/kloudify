@@ -1,8 +1,6 @@
 #!/bin/bash
 echo 'Performance testing...'
 
-echo 'Installing Newman...'
-
 # newman run ./API-v1-qa.postman_collection.json -e ./UAT.postman_environment.json 
 #echo '2'
 #newman run ./API-v1-qa.postman_collection.json -e ./UAT.postman_environment.json  > /dev/null 2>&1 < /dev/null &
@@ -11,7 +9,7 @@ echo 'Installing Newman...'
 
 LOADTEST='newman run ./API-v1-qa.postman_collection.json -e ./UAT.postman_environment.json'
 
-for i in {1..2}
+for i in {1..10}
 do
  LOADTEST="${LOADTEST} & newman run ./API-v1-qa.postman_collection.json -e ./UAT.postman_environment.json"
 done
