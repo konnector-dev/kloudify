@@ -25,7 +25,9 @@ steps:
     '--platform',
     'managed',
     '--memory',
-    '128Mi'
+    '128Mi',
+    '--update-env-vars',
+    'SLACK_WEBHOOK_URL=${_SWH}'
     ]
 images:
 - gcr.io/$PROJECT_ID/${_CLOUD_RUN_SERVICE}
@@ -35,3 +37,4 @@ options:
 
 substitutions:
     _CLOUD_RUN_SERVICE: 'slack-kloudify'
+    _SWH: 'http://api.slack.com'
