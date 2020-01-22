@@ -3,14 +3,14 @@
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://hooks.slack.com/services/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",
+  CURLOPT_URL => "https://hooks.slack.com/services/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",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{\"text\":\"Again, hello!!\"}",
+  CURLOPT_POSTFIELDS => "{\"text\":\"Again, hello!! - It is time now : ".date('F d, Y H:i:s')."\"}",
   CURLOPT_HTTPHEADER => array(
     "Accept: */*",
     "Accept-Encoding: gzip, deflate",
@@ -32,4 +32,3 @@ if ($err) {
 } else {
   echo $response;
 }
-
