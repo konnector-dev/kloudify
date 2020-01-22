@@ -1,5 +1,10 @@
 <?php
 
+require_once '../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable('../../');
+$dotenv->load();
+
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -10,7 +15,7 @@ curl_setopt_array($curl, array(
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{\"text\":\"Again, hello!! - It is time now : ".date('F d, Y H:i:s')."\"}",
+  CURLOPT_POSTFIELDS => "{\"channel\":\"". getenv('SLACK_CHANNEL_ID') ."\", \"text\":\"Again, hello!! - It is time now : ".date('F d, Y H:i:s')."\"}",
   CURLOPT_HTTPHEADER => array(
     "Accept: */*",
     "Accept-Encoding: gzip, deflate",
