@@ -1,0 +1,13 @@
+{
+    "name": "jdecode/slack-kloudify",
+    "description": "Slack kloudifier",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JD Singh",
+            "email": "jdecode@gmail.com"
+        }
+    ],
+    "require": {}
+}
