@@ -3,7 +3,7 @@
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://hooks.slack.com/services/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",
+  CURLOPT_URL => getenv('SLACK_WEBHOOK_URL'),
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,

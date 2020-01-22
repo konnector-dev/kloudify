@@ -9,5 +9,7 @@
             "email": "jdecode@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^4.1"
+    }
 }
