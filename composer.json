@@ -10,6 +10,8 @@
         }
     ],
     "require": {
-        "vlucas/phpdotenv": "^4.1"
+        "vlucas/phpdotenv": "^4.1",
+        "guzzlehttp/guzzle": "^6.5",
+        "ext-curl": "*"
     }
 }
