@@ -1,13 +1,13 @@
 <?php
 
-use GuzzleHttp\Client;
-
 
 if(file_exists('../../.env')) {
     require_once '../../vendor/autoload.php';
     $dotenv = Dotenv\Dotenv::createImmutable('../../');
     $dotenv->load();
 }
+
+use GuzzleHttp\Client;
 
 class kurl
 {
