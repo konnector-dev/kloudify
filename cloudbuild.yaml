@@ -40,3 +40,4 @@ substitutions:
     _CLOUD_RUN_SERVICE: 'slack-kloudify'
     _SLACK_OAUTH_BOT_TOKEN: 'slack-oauth-bot-token'
     _SLACK_CHANNEL_ID: 'channel-id'
+    _GET_URL: 'https://leave-notifier.ucreate.dev/?team=India&type=plain'

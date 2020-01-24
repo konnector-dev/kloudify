@@ -45,7 +45,7 @@ class kurl
     }
 }
 
-$url = 'https://leave-notifier.ucreate.dev/?type=plain';
+$url = getenv('GET_URL');
 
 $client = new Client();
 $response = $client->request('GET', $url);
