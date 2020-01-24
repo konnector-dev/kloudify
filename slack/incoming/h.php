@@ -7,7 +7,6 @@ if(file_exists('../../.env')) {
     $dotenv->load();
 }
 
-use GuzzleHttp\Client;
 
 class kurl
 {
@@ -47,17 +46,9 @@ class kurl
     }
 }
 
-$url = getenv('GET_URL');
+$h_response = base64_encode(file_get_contents('php://input'));
 
-$client = new Client();
-$response = $client->request('GET', $url);
-
-$leaves = '';
-if($response->getStatusCode() == 200) {
-    $leaves = $response->getBody();
-}
-
-if(strlen($leaves)) {
+if(strlen($h_response)) {
     $r = new Kurl();
-    echo $r->kirl($leaves);
+    echo $r->kirl($h_response);
 }
