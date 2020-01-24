@@ -37,7 +37,7 @@ RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/Allo
 
 #RUN sed -ri -e 's/project_id/${GOOGLE_CLOUD_PROJECT}/g' .env
 
-#RUN composer install -n --prefer-dist
+RUN composer install -n --prefer-dist
 
 #RUN chown -R www-data:www-data storage bootstrap
 #RUN chmod -R 777 storage bootstrap
