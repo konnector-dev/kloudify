@@ -1,8 +1,8 @@
 <?php
 
+require_once '../../vendor/autoload.php';
 
 if(file_exists('../../.env')) {
-    require_once '../../vendor/autoload.php';
     $dotenv = Dotenv\Dotenv::createImmutable('../../');
     $dotenv->load();
 }
