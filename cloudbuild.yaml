@@ -38,5 +38,5 @@ options:
 
 substitutions:
     _CLOUD_RUN_SERVICE: 'slack-kloudify'
-    _SLACK_OAUTH_BOT_TOKEN: 'http://api.slack.com'
-    _SLACK_CHANNEL_ID: ''
+    _SLACK_OAUTH_BOT_TOKEN: 'slack-oauth-bot-token'
+    _SLACK_CHANNEL_ID: 'channel-id'

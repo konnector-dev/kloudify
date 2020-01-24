@@ -9,7 +9,7 @@ $dotenv->load();
 
 class kurl
 {
-    function __construct()
+    public function kirl(string $leaves)
     {
         $curl = curl_init();
 
@@ -21,7 +21,7 @@ class kurl
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => "{\n\t\"channel\":\"" . getenv('SLACK_CHANNEL_ID') . "\",\n\t\"text\":\"Hello world - the time now is : " . date('F d, Y H:i:s') . " \"\n}",
+            CURLOPT_POSTFIELDS => "{\n\t\"channel\":\"" . getenv('SLACK_CHANNEL_ID') . "\",\n\t\"text\":\"" . $leaves ."\n> ".date('F d, Y H:i:s') . " \"\n}",
             CURLOPT_HTTPHEADER => ['Accept: */*',
                 'Accept-Encoding: gzip, deflate',
                 'Authorization: Bearer ' . getenv('SLACK_OAUTH_BOT_TOKEN'),
@@ -33,32 +33,29 @@ class kurl
                 ],
             ]
         );
-
-        $response = curl_exec($curl);
+        curl_exec($curl);
         $err = curl_error($curl);
 
         curl_close($curl);
 
         if ($err)
         {
-        echo 'cURL Error #:' . $err;
-        }
-
-        else {
-            echo $response;
+            echo 'cURL Error #:' . $err;
         }
     }
 }
 
-$url = 'https://commit-status.ucreate.dev/';
+$url = 'https://leave-notifier.ucreate.dev/?type=plain';
 
 $client = new Client();
 $response = $client->request('GET', $url);
 
-$commits = '';
+$leaves = '';
 if($response->getStatusCode() == 200) {
-    $commits = $response->getBody();
+    $leaves = $response->getBody();
 }
-if(strlen($commits)) {
 
+if(strlen($leaves)) {
+    $r = new Kurl();
+    echo $r->kirl($leaves);
 }
