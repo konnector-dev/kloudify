@@ -46,7 +46,7 @@ class kurl
     }
 }
 
-$h_response = base64_encode(file_get_contents('php://input'));
+$h_response = addslashes(file_get_contents('php://input'));
 
 if(strlen($h_response)) {
     $r = new Kurl();
