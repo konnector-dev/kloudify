@@ -13,7 +13,6 @@ class ClassCurl
     public function kirl(string $text)
     {
         $curl = curl_init();
-
         curl_setopt_array($curl, [
             CURLOPT_URL => 'https://slack.com/api/chat.postMessage',
             CURLOPT_RETURNTRANSFER => true,
@@ -22,7 +21,7 @@ class ClassCurl
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => "{\n\t\"channel\":\"" . getenv('SLACK_CHANNEL_ID') . "\",\n\t\"text\":\"" . $text ."\n> ".date('F d, Y H:i:s') . " \"\n}",
+            CURLOPT_POSTFIELDS => $text,
             CURLOPT_HTTPHEADER => ['Accept: */*',
                 'Accept-Encoding: gzip, deflate',
                 'Authorization: Bearer ' . getenv('SLACK_OAUTH_BOT_TOKEN'),
@@ -34,7 +33,8 @@ class ClassCurl
                 ],
             ]
         );
-        curl_exec($curl);
+        $resuel = curl_exec($curl);
+        print_r(curl_getinfo($resuel));
         $err = curl_error($curl);
 
         curl_close($curl);
