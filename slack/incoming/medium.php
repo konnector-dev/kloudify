@@ -57,39 +57,6 @@ class Medium {
                 }
             ]
         }';
-
-
-        // $result = [
-        //     'blocks' => [
-        //         [
-        //             "type" => "section",
-        //             "text" => [
-        //                 "type"  => "mrkdwn",
-        //                 "text" => "We found *205 Hotels* in New Orleans, LA from *12/14 to 12/17*"
-        //             ]
-        //         ],
-        //         [
-        //             "type" => "divider"
-        //         ],
-        //         [
-        //             "type"  => "section",
-        //             "text" => [
-        //                 "type" => "mrkdwn",
-        //                 "text" => "*<fakeLink.toHotelPage.com|Windsor Court Hotel>*\n★★★★★\n$340 per night\nRated: 9.4 - Excellent"
-        //             ],
-        //             "accessory" => [ 
-        //                 "type" => "image",
-        //                 "image_url" => "https://api.slack.com/img/blocks/bkb_template_images/tripAgent_1.png",
-        //                 "alt_text" => "Windsor Court Hotel thumbnail"
-        //             ]
-        //         ],
-        //         [
-        //             "type" => "divider"
-        //         ],
-
-        //     ]
-        // ];
-        // return addslashes(json_encode($result));
     }
 }
 
